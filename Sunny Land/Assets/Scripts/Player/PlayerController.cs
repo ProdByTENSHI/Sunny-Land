@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private float movSpeed = 5f;
     [SerializeField] private float jumpVelocity;
+    [SerializeField] private float fallMultiplier = 2.5f;
     [SerializeField] private float groundCheckRadius = 0.5f;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask whatIsGround;
@@ -49,6 +50,12 @@ public class PlayerController : MonoBehaviour
         {
             _rb.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
         }
+
+        // Jumping Gravity
+        if(_rb.velocity.y < 0)
+        {
+            _rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier -1) * Time.deltaTime;
+        }
     }
 
     private void FlipCharacterFacing()
@@ -62,6 +69,11 @@ public class PlayerController : MonoBehaviour
     public float GetHorizontalInput()
     {
         return horInput;
+    }
+
+    public float GetVerticalVelocity()
+    {
+        return _rb.velocity.y;
     }
 
     private void OnDrawGizmosSelected()
