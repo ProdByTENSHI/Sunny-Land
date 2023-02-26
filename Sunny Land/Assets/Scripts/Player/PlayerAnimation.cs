@@ -21,6 +21,7 @@ public class PlayerAnimation : MonoBehaviour
     private void Update()
     {
         HandleAnimations();
+        HandleJumping();
     }
 
     private void HandleAnimations()
@@ -35,20 +36,26 @@ public class PlayerAnimation : MonoBehaviour
         _anim.SetFloat("Running_F", _running);
 
         // Jumping and Falling
-        if(_controller.GetVerticalVelocity() > 0)
-        {
-            _anim.enabled = false;
-            _sr.sprite = jumpSprite;
-        } else if(_controller.GetVerticalVelocity() < 0)
-        {
-            _anim.enabled = false;
-            _sr.sprite = fallSprite;
-        } else if(_controller.GetVerticalVelocity() == 0)
-        {
-            _anim.enabled = true;
-        }
 
         // Crouching
         _anim.SetBool("isCrouching", _controller.isCrouching());
+    }
+
+    private void HandleJumping()
+    {
+        if (_controller.GetVerticalVelocity() > 0)
+        {
+            _anim.enabled = false;
+            _sr.sprite = jumpSprite;
+        }
+        else if (_controller.GetVerticalVelocity() < 0)
+        {
+            _anim.enabled = false;
+            _sr.sprite = fallSprite;
+        }
+        else if (_controller.GetVerticalVelocity() == 0)
+        {
+            _anim.enabled = true;
+        }
     }
 }

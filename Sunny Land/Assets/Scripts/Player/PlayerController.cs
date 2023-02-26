@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,6 +20,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround;
     private bool onGround { get; set; }
 
+    public delegate void OnJump();
+    public static event OnJump onJump;
+
     // CROUCHING
     [SerializeField] float crouchSlow = 2f;
     private bool _isCrouching;
@@ -36,6 +40,7 @@ public class PlayerController : MonoBehaviour
     private void Update()
     {
         HandleMovement();
+        HandleJumping();
     }
 
     private void HandleMovement()
@@ -50,19 +55,6 @@ public class PlayerController : MonoBehaviour
             FlipCharacterFacing();
         }
 
-        // Jumping
-        onGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        if(Input.GetKeyDown(KeyCode.Space) && onGround)
-        {
-            _rb.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
-        }
-
-        // Jumping Gravity
-        if(_rb.velocity.y < 0)
-        {
-            _rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier -1) * Time.deltaTime;
-        }
-
         // Crouching
         if(Input.GetKeyDown(KeyCode.LeftControl))
         {
@@ -72,6 +64,21 @@ public class PlayerController : MonoBehaviour
         {
             _isCrouching = false;
             movSpeed *= crouchSlow;
+        }
+    }
+
+    private void HandleJumping()
+    {
+        onGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
+        if (Input.GetKeyDown(KeyCode.Space) && onGround)
+        {
+            _rb.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
+            onJump?.Invoke();
+        }
+
+        if (_rb.velocity.y < 0)
+        {
+            _rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
     }
 
