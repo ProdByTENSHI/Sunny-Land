@@ -47,5 +47,8 @@ public class PlayerAnimation : MonoBehaviour
         {
             _anim.enabled = true;
         }
+
+        // Crouching
+        _anim.SetBool("isCrouching", _controller.isCrouching());
     }
 }

@@ -356,8 +356,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 1797121645}
-  offset: {x: 0, y: 0.5, z: -10}
-  smoothness: 0.35
+  offset: {x: 0, y: 1, z: -10}
+  smoothness: 0.3
 --- !u!1 &619394800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1762,6 +1762,7 @@ MonoBehaviour:
   whatIsGround:
     serializedVersion: 2
     m_Bits: 8
+  crouchSlow: 2
 --- !u!50 &1797121641
 Rigidbody2D:
   serializedVersion: 4

@@ -6,16 +6,22 @@ public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D _rb;
 
+    // BASIC MOVEMENT
     [SerializeField] private float movSpeed = 5f;
+    private float horInput;
+    private bool isFacingRight;
+
+    // JUMPING
     [SerializeField] private float jumpVelocity;
     [SerializeField] private float fallMultiplier = 2.5f;
     [SerializeField] private float groundCheckRadius = 0.5f;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask whatIsGround;
-
-    private float horInput;
-    private bool isFacingRight;
     private bool onGround { get; set; }
+
+    // CROUCHING
+    [SerializeField] float crouchSlow = 2f;
+    private bool _isCrouching;
 
     private void Awake()
     {
@@ -56,6 +62,17 @@ public class PlayerController : MonoBehaviour
         {
             _rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier -1) * Time.deltaTime;
         }
+
+        // Crouching
+        if(Input.GetKeyDown(KeyCode.LeftControl))
+        {
+            _isCrouching = true;
+            movSpeed /= crouchSlow;
+        } else if(Input.GetKeyUp(KeyCode.LeftControl))
+        {
+            _isCrouching = false;
+            movSpeed *= crouchSlow;
+        }
     }
 
     private void FlipCharacterFacing()
@@ -74,6 +91,11 @@ public class PlayerController : MonoBehaviour
     public float GetVerticalVelocity()
     {
         return _rb.velocity.y;
+    }
+
+    public bool isCrouching()
+    {
+        return _isCrouching;
     }
 
     private void OnDrawGizmosSelected()
