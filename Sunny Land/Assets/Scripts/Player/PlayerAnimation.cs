@@ -35,8 +35,6 @@ public class PlayerAnimation : MonoBehaviour
 
         _anim.SetFloat("Running_F", _running);
 
-        // Jumping and Falling
-
         // Crouching
         _anim.SetBool("isCrouching", _controller.isCrouching());
     }
