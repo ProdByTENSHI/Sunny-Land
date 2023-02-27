@@ -9,6 +9,9 @@ public class PlayerManager : MonoBehaviour
     private static int health;
     private static int maxHealth = 10;
 
+    private static int points;
+
+    public static UnityEvent onPointChange;
     public static UnityEvent<int> onHealthChange;
     public static UnityEvent onDeath;
 
@@ -20,6 +23,9 @@ public class PlayerManager : MonoBehaviour
 
         if(onHealthChange == null)
             onHealthChange = new UnityEvent<int>();
+
+        if (onPointChange == null)
+            onPointChange = new UnityEvent();
     }
 
     private void Update()
@@ -35,5 +41,16 @@ public class PlayerManager : MonoBehaviour
     {
         health = amount;
         onHealthChange?.Invoke(amount);
+    }
+
+    public static int GetHealth()
+    {
+        return health;
+    }
+
+    public static void AddPoints(int amount)
+    {
+        points = amount;
+        onPointChange?.Invoke();
     }
 }
