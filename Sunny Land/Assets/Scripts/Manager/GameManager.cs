@@ -7,11 +7,23 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         SetGameSpeed(1);
+        DataHandler.Load();
     }
 
     private void Start()
     {
-        PlayerManager.onDeath.AddListener(OnDeath);
+        PlayerManager.onDeath += OnDeath;
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+            DataHandler.Load();
+        } else if(Input.GetKeyDown(KeyCode.S))
+        {
+            DataHandler.Save();
+        }
     }
 
     private void OnDeath()

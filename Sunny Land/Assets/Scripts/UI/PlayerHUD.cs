@@ -8,7 +8,7 @@ public class PlayerHUD : MonoBehaviour
 
     private void Start()
     {
-        PlayerManager.onPointChange.AddListener(UpdatePointDisplay);
+        PlayerManager.onPointChange += UpdatePointDisplay;
     }
 
     private void UpdatePointDisplay()
