@@ -14,9 +14,10 @@ public class PointItem : MonoBehaviour, ICollectible
 
     public void OnCollect()
     {
-        PlayerManager.AddPoints(points);
+        PlayerManager.points += this.points;
         _anim.SetTrigger("Collect");
         Destroy(gameObject, _anim.GetCurrentAnimatorStateInfo(0).length);
+        Debug.Log("Collected: " + PlayerManager.points);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

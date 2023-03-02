@@ -6,13 +6,10 @@ using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
-    private static int health;
+    public static int health;
+    public static int points;
     private static int maxHealth = 10;
 
-    private static int points;
-
-    public static Action onPointChange;
-    public static Action<int> onHealthChange;
     public static Action onDeath;
 
     private void Awake()
@@ -27,27 +24,5 @@ public class PlayerManager : MonoBehaviour
             onDeath?.Invoke();
             Destroy(gameObject);
         }
-    }
-
-    public static void SetHealth(int amount)
-    {
-        health = amount;
-        onHealthChange?.Invoke(amount);
-    }
-
-    public static int GetHealth()
-    {
-        return health;
-    }
-
-    public static void AddPoints(int amount)
-    {
-        points = amount;
-        onPointChange?.Invoke();
-    }
-
-    public static int GetPoints()
-    {
-        return points;
     }
 }

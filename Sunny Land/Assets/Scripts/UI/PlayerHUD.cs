@@ -6,13 +6,8 @@ public class PlayerHUD : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI m_PointText;
 
-    private void Start()
+    private void Update()
     {
-        PlayerManager.onPointChange += UpdatePointDisplay;
-    }
-
-    private void UpdatePointDisplay()
-    {
-        m_PointText.SetText(PlayerManager.GetHealth().ToString());
+        m_PointText.text = PlayerManager.points.ToString();
     }
 }

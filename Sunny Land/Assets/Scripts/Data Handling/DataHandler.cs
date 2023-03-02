@@ -7,23 +7,22 @@ public class DataHandler : MonoBehaviour
     private void Start()
     {
         // TODO: Change to Saving the Last Checkpoint
-        PlayerManager.onDeath += Save;      // Reset Player Save when Dying 
+        PlayerManager.onDeath += Save;      // Save when Dying
     }
 
     public static void Save()
     {
-        int currentPoints = PlayerManager.GetPoints();
-        int currentHealth = PlayerManager.GetHealth();
+        PlayerPrefs.SetInt("Points", PlayerManager.points);
+        PlayerPrefs.SetInt("Health", PlayerManager.health);
 
-        PlayerPrefs.Save();
-        Debug.Log("Saved!");
+        Debug.Log($"{PlayerPrefs.GetInt("Points")}");
     }
 
     public static void Load()
     {
-        PlayerManager.SetHealth(PlayerPrefs.GetInt("Player_Health"));
-        PlayerManager.AddPoints(PlayerPrefs.GetInt("Player_Points"));
+        PlayerManager.health = PlayerPrefs.GetInt("Health");
+        PlayerManager.points = PlayerPrefs.GetInt("Points");
 
-        Debug.Log($"Loaded {PlayerPrefs.GetInt("Player_Points")}");
+        Debug.Log($"Loaded {PlayerPrefs.GetInt("Points")}");
     }
 }
