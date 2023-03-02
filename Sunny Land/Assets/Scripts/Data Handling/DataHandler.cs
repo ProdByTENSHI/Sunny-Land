@@ -7,7 +7,7 @@ public class DataHandler : MonoBehaviour
     private void Start()
     {
         // TODO: Change to Saving the Last Checkpoint
-        PlayerManager.onDeath += Save;      // Save when Dying
+        PlayerManager.onDeath += () => PlayerPrefs.DeleteKey("Points");      // Clear Points when Dying
     }
 
     public static void Save()

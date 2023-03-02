@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,11 +6,18 @@ using UnityEngine;
 public class PointItem : MonoBehaviour, ICollectible
 {
     private Animator _anim;
+    private string id;
     [SerializeField] private int points;            // Amount of Points you get when collecting the Item
+
+    public static Action<string> onCollect;         // Triggers On Collect with ID
 
     private void Awake()
     {
         _anim = GetComponent<Animator>();
+        if(id == null)
+        {
+            id = System.Guid.NewGuid().ToString();
+        }
     }
 
     public void OnCollect()
@@ -17,7 +25,8 @@ public class PointItem : MonoBehaviour, ICollectible
         PlayerManager.points += this.points;
         _anim.SetTrigger("Collect");
         Destroy(gameObject, _anim.GetCurrentAnimatorStateInfo(0).length);
-        Debug.Log("Collected: " + PlayerManager.points);
+        FindObjectOfType<AudioManager>().Play("Collect");
+        onCollect?.Invoke(id);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -25,5 +34,10 @@ public class PointItem : MonoBehaviour, ICollectible
         if(collision.CompareTag("Player")) {
             OnCollect();
         }
+    }
+
+    public string GetID()
+    {
+        return id;
     }
 }
