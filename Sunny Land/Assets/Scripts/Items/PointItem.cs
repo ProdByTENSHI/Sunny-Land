@@ -6,7 +6,7 @@ using UnityEngine;
 public class PointItem : MonoBehaviour, ICollectible
 {
     private Animator _anim;
-    private string id;
+    [SerializeField] private string id;             // Unique ID of the Item; Used for Saving and Loading
     [SerializeField] private int points;            // Amount of Points you get when collecting the Item
 
     public static Action<string> onCollect;         // Triggers On Collect with ID

@@ -7,6 +7,6 @@ public class Deathzone : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
-            PlayerManager.health = 0;
+            PlayerHealth.currentHealth = 0;
     }
 }

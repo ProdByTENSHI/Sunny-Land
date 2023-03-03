@@ -6,23 +6,10 @@ using UnityEngine.Events;
 
 public class PlayerManager : MonoBehaviour
 {
-    public static int health;
     public static int points;
-    private static int maxHealth = 10;
 
-    public static Action onDeath;
-
-    private void Awake()
+    public void Spawn(Vector2 spawnPosition)
     {
-        health = maxHealth;
-    }
-
-    private void Update()
-    {
-        if(health == 0)
-        {
-            onDeath?.Invoke();
-            Destroy(gameObject);
-        }
+        transform.position = spawnPosition;
     }
 }

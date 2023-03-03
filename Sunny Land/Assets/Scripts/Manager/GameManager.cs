@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
+    public static int currentLevel;
+
     private void Awake()
     {
         SetGameSpeed(1);
@@ -12,18 +14,21 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        PlayerManager.onDeath += OnDeath;
+        PlayerHealth.onDeath += OnDeath;
     }
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.L))
+        if (Input.GetKeyDown(KeyCode.L))
         {
             DataHandler.Load();
-        } else if(Input.GetKeyDown(KeyCode.S))
+        }
+        else if (Input.GetKeyDown(KeyCode.S))
         {
             DataHandler.Save();
         }
+
+        currentLevel = SceneHandler.GetCurrentSceneIndex();
     }
 
     private void OnDeath()
