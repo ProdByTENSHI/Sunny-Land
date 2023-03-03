@@ -45,6 +45,6 @@ public class CheckPoint : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.DrawWireSphere(transform.position, 1);
+        Gizmos.DrawWireSphere(transform.position, GetComponent<CircleCollider2D>().radius);
     }
 }

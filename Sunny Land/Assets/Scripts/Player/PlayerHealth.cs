@@ -31,6 +31,8 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     public void OnDeath()
     {
         onDeath?.Invoke();
-        Destroy(gameObject);
+        currentHealth = maxHealth;
+        PlayerManager.points -= 5;
+        Debug.Log("Player died");
     }
 }

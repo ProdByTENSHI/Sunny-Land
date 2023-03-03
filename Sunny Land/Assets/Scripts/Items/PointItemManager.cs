@@ -6,10 +6,18 @@ public class PointItemManager : MonoBehaviour
 {
     private Dictionary<string, PointItem> items;
 
-    private void Start()
+    private void OnEnable()
     {
         PointItem.onCollect += Remove;
+    }
 
+    private void OnDisable()
+    {
+        PointItem.onCollect -= Remove;
+    }
+
+    private void Start()
+    {
         items = new Dictionary<string, PointItem>();
         foreach(PointItem item in FindObjectsOfType<PointItem>())
         {

@@ -33,7 +33,7 @@ public class GameManager : MonoBehaviour
 
     private void OnDeath()
     {
-        SetGameSpeed(0);
+        // SetGameSpeed(0);
     }
 
     public static void SetGameSpeed(int time)
