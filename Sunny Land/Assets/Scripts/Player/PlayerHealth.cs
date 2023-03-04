@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerHealth : MonoBehaviour, IDamagable
 {
     public static int currentHealth;
-    private static int maxHealth = 10;
+    public static int maxHealth = 10;
 
     public static Action onDeath;
 
