@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public static int currentLevel;
     private FileManager fileManager;
     private GameData gameData;
+
+    public static int currentLevel;
 
     private void Awake()
     {
@@ -17,9 +18,10 @@ public class GameManager : MonoBehaviour
             gameData = new GameData();
         } else
         {
-            PlayerHealth.currentHealth      = gameData.currentHealth;
-            PlayerHealth.maxHealth          = gameData.maxHealth;
-            PlayerManager.points            = gameData.points;
+            PlayerHealth.currentHealth              = gameData.currentHealth;
+            PlayerHealth.maxHealth                  = gameData.maxHealth;
+            PlayerManager.points                    = gameData.points;
+            CheckpointManager.currentCheckPoint     = gameData.currentCheckPoint;
         }
 
         SetGameSpeed(1);
@@ -35,9 +37,10 @@ public class GameManager : MonoBehaviour
     {
         currentLevel = SceneHandler.GetCurrentSceneIndex();
 
-        gameData.currentHealth  = PlayerHealth.currentHealth;
-        gameData.maxHealth      = PlayerHealth.maxHealth;
-        gameData.points         = PlayerManager.points;
+        gameData.currentHealth          = PlayerHealth.currentHealth;
+        gameData.maxHealth              = PlayerHealth.maxHealth;
+        gameData.points                 = PlayerManager.points;
+        gameData.currentCheckPoint      = CheckpointManager.currentCheckPoint;
     }
 
     private void OnDeath()

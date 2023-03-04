@@ -8,4 +8,6 @@ public class GameData
     public int points;
     public int currentHealth;
     public int maxHealth;
+
+    public int currentCheckPoint;
 }
