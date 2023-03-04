@@ -6,19 +6,14 @@ using UnityEngine;
 public class CheckpointManager : MonoBehaviour
 {
     [SerializeField] private CheckPoint[] checkPoints;      // Array with all Checkpoints in Scene
-    [SerializeField] private HashSet<CheckPoint> visitedCheckPoints;
-    public static int currentCheckPoint = -1;                  // ID of last Check Point
-
-    private void Start()
-    {
-        visitedCheckPoints = new HashSet<CheckPoint>();
-    }
+    public static int currentCheckPoint;                  // ID of last Check Point
 
     private void OnEnable()
     {
         PlayerHealth.onDeath += () => SpawnAtCheckPoint(currentCheckPoint);
         for (int i = 0; i < checkPoints.Length; i++)
         {
+            checkPoints[i].SetCheckPointID(i);
             checkPoints[i].onSpawnEnter += SetLastCheckPoint;
         }
     }
