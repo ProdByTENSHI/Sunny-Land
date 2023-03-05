@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CheckpointManager : MonoBehaviour
+public class CheckPointManager : MonoBehaviour
 {
     [SerializeField] private CheckPoint[] checkPoints;      // Array with all Checkpoints in Scene
     public static int currentCheckPoint;                  // ID of last Check Point
@@ -31,13 +31,12 @@ public class CheckpointManager : MonoBehaviour
         currentCheckPoint = id;
     }
 
-    private void SpawnAtCheckPoint(int id)
+    public void SpawnAtCheckPoint(int id)
     {
-        FindObjectOfType<PlayerManager>().Spawn(new Vector2(checkPoints[id].GetSpawn().x, checkPoints[id].GetSpawn().y + 5));
         Debug.Log("Player spawned at " + id);
     }
 
-    private CheckPoint GetCheckPoint(int id)
+    public CheckPoint GetCheckPoint(int id)
     {
         for (int i = 0; i < checkPoints.Length; i++)
         {
@@ -48,5 +47,10 @@ public class CheckpointManager : MonoBehaviour
         }
 
         return new CheckPoint();
+    }
+
+    public CheckPoint[] GetCheckPoints()
+    {
+        return checkPoints;
     }
 }

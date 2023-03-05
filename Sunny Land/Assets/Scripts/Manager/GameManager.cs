@@ -21,7 +21,7 @@ public class GameManager : MonoBehaviour
             PlayerHealth.currentHealth              = gameData.currentHealth;
             PlayerHealth.maxHealth                  = gameData.maxHealth;
             PlayerManager.points                    = gameData.points;
-            CheckpointManager.currentCheckPoint     = gameData.currentCheckPoint;
+            CheckPointManager.currentCheckPoint     = gameData.currentCheckPoint;
         }
 
         SetGameSpeed(1);
@@ -40,7 +40,7 @@ public class GameManager : MonoBehaviour
         gameData.currentHealth          = PlayerHealth.currentHealth;
         gameData.maxHealth              = PlayerHealth.maxHealth;
         gameData.points                 = PlayerManager.points;
-        gameData.currentCheckPoint      = CheckpointManager.currentCheckPoint;
+        gameData.currentCheckPoint      = CheckPointManager.currentCheckPoint;
     }
 
     private void OnDeath()
