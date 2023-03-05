@@ -18,6 +18,11 @@ public class PlayerAnimation : MonoBehaviour
         _controller = GetComponent<PlayerController>();
     }
 
+    private void Start()
+    {
+        PlayerHealth.onDamage += OnDamage;
+    }
+
     private void Update()
     {
         HandleAnimations();
@@ -55,5 +60,10 @@ public class PlayerAnimation : MonoBehaviour
         {
             _anim.enabled = true;
         }
+    }
+
+    private void OnDamage()
+    {
+        _anim.SetTrigger("Damage");
     }
 }

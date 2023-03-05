@@ -6,6 +6,7 @@ using UnityEngine;
 public class PointItem : MonoBehaviour, ICollectible
 {
     private Animator _anim;
+
     [SerializeField] private string id;             // Unique ID of the Item; Used for Saving and Loading
     [SerializeField] private int points;            // Amount of Points you get when collecting the Item
 
@@ -14,6 +15,8 @@ public class PointItem : MonoBehaviour, ICollectible
     private void Awake()
     {
         _anim = GetComponent<Animator>();
+
+        // Assign ID to the Item if ID isn't already Set
         if(id == null)
         {
             id = System.Guid.NewGuid().ToString();

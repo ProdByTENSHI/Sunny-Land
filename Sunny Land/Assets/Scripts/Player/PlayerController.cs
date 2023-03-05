@@ -20,8 +20,11 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private LayerMask whatIsGround;
     private bool onGround { get; set; }
 
-    public delegate void OnJump();
-    public static event OnJump onJump;
+    // DOUBLE JUMP
+    [SerializeField] private int airJumps = 1;
+    private int remainingJumps;
+
+    public static Action onJump;
 
     // CROUCHING
     [SerializeField] float crouchSlow = 2f;
@@ -69,19 +72,31 @@ public class PlayerController : MonoBehaviour
 
     private void HandleJumping()
     {
+        // Ground Check using Layermasks
         onGround = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, whatIsGround);
-        if (Input.GetKeyDown(KeyCode.Space) && onGround)
+
+        // Jumping
+        if (Input.GetKeyDown(KeyCode.Space) && remainingJumps > 0)
         {
+            remainingJumps--;
             _rb.AddForce(Vector2.up * jumpVelocity, ForceMode2D.Impulse);
             onJump?.Invoke();
         }
 
+        // Reset remaining Jumps once on Ground again
+        if(onGround)
+        {
+            remainingJumps = airJumps;
+        }
+
+        // Physics
         if (_rb.velocity.y < 0)
         {
             _rb.velocity += Vector2.up * Physics2D.gravity.y * (fallMultiplier - 1) * Time.deltaTime;
         }
     }
 
+    // Flip Character Facing -> Used for changing Facing Direction when changing Running Direction
     private void FlipCharacterFacing()
     {
         isFacingRight = !isFacingRight;

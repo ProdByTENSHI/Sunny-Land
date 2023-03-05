@@ -8,6 +8,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     public static int currentHealth;
     public static int maxHealth = 10;
 
+    public static Action onDamage;
     public static Action onDeath;
 
     private void Awake()
@@ -26,6 +27,7 @@ public class PlayerHealth : MonoBehaviour, IDamagable
     public void OnDamage()
     {
         Debug.Log("Dealt Damage to Player");
+        onDamage?.Invoke();
     }
 
     public void OnDeath()
@@ -33,6 +35,5 @@ public class PlayerHealth : MonoBehaviour, IDamagable
         onDeath?.Invoke();
         currentHealth = maxHealth;
         PlayerManager.points -= 5;
-        Debug.Log("Player died");
     }
 }

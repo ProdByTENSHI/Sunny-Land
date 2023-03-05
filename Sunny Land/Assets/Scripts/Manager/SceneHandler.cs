@@ -20,9 +20,9 @@ public class SceneHandler : MonoBehaviour
         SceneManager.LoadScene(index);
     }
 
-    public static void LoadLevel(int level)
+    public static void LoadNextScene()
     {
-        SceneManager.LoadScene(level + 1);      // Level Index + Main Menu
+        SceneManager.LoadScene(GetCurrentSceneIndex() + 1);
     }
 
     public static int GetCurrentSceneIndex()

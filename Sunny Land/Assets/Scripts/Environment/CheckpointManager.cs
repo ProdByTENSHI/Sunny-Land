@@ -10,7 +10,6 @@ public class CheckPointManager : MonoBehaviour
 
     private void OnEnable()
     {
-        PlayerHealth.onDeath += () => SpawnAtCheckPoint(currentCheckPoint);
         for (int i = 0; i < checkPoints.Length; i++)
         {
             checkPoints[i].SetCheckPointID(i);
@@ -29,11 +28,6 @@ public class CheckPointManager : MonoBehaviour
     private void SetLastCheckPoint(int id)
     {
         currentCheckPoint = id;
-    }
-
-    public void SpawnAtCheckPoint(int id)
-    {
-        Debug.Log("Player spawned at " + id);
     }
 
     public CheckPoint GetCheckPoint(int id)
