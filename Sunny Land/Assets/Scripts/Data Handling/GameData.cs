@@ -11,6 +11,7 @@ public class GameData
     public int maxHealth;
 
     // Level
+    public int currentLevel;
     public int currentCheckPoint;
     
     // Items

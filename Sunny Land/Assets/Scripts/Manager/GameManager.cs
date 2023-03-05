@@ -22,6 +22,7 @@ public class GameManager : MonoBehaviour
             PlayerHealth.maxHealth                  = gameData.maxHealth;
             PlayerManager.points                    = gameData.points;
             CheckPointManager.currentCheckPoint     = gameData.currentCheckPoint;
+            currentLevel                            = gameData.currentLevel;
         }
 
         SetGameSpeed(1);
@@ -35,12 +36,11 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        currentLevel = SceneHandler.GetCurrentSceneIndex();
-
         gameData.currentHealth          = PlayerHealth.currentHealth;
         gameData.maxHealth              = PlayerHealth.maxHealth;
         gameData.points                 = PlayerManager.points;
         gameData.currentCheckPoint      = CheckPointManager.currentCheckPoint;
+        gameData.currentLevel           = SceneHandler.GetCurrentSceneIndex();
     }
 
     private void OnDeath()
