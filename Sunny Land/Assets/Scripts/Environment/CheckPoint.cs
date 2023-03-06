@@ -10,7 +10,7 @@ public class CheckPoint : MonoBehaviour
     [SerializeField] private Sprite activatedSprite;        // Sprite when Activated
     public bool hasReached;
 
-    public Action<int> onSpawnEnter;
+    public Action<int> onCheckPointEnter;        // Event that gets Invoked when Player enters Checkpoint
 
     private void Start()
     {
@@ -26,9 +26,9 @@ public class CheckPoint : MonoBehaviour
         {
             if(!hasReached)
             {
-                onSpawnEnter?.Invoke(checkPointID);
+                onCheckPointEnter?.Invoke(checkPointID);                        // Trigger the OnCheckPointEnter Event
                 hasReached = true;
-                GetComponent<SpriteRenderer>().sprite = activatedSprite;
+                GetComponent<SpriteRenderer>().sprite = activatedSprite;        // Change Sprite from default to activated
             }
         }
     }

@@ -6,14 +6,14 @@ using UnityEngine;
 public class CheckPointManager : MonoBehaviour
 {
     [SerializeField] private CheckPoint[] checkPoints;      // Array with all Checkpoints in Scene
-    public static int currentCheckPoint;                  // ID of last Check Point
+    public static int currentCheckPoint;                    // ID of last Check Point
 
     private void OnEnable()
     {
         for (int i = 0; i < checkPoints.Length; i++)
         {
-            checkPoints[i].SetCheckPointID(i);
-            checkPoints[i].onSpawnEnter += SetLastCheckPoint;
+            checkPoints[i].SetCheckPointID(i);                      // Set ID of found Check Points
+            checkPoints[i].onCheckPointEnter += SetLastCheckPoint;       // Subscribe to On Spawn Enter Event to get last Checkpoint
         }
     }
 
@@ -21,7 +21,7 @@ public class CheckPointManager : MonoBehaviour
     {
         for (int i = 0; i < checkPoints.Length; i++)
         {
-            checkPoints[i].onSpawnEnter -= SetLastCheckPoint;
+            checkPoints[i].onCheckPointEnter -= SetLastCheckPoint;       // Unsubscribe from Event
         }
     }
 
@@ -30,6 +30,7 @@ public class CheckPointManager : MonoBehaviour
         currentCheckPoint = id;
     }
 
+    // Get Checkpoint by ID
     public CheckPoint GetCheckPoint(int id)
     {
         for (int i = 0; i < checkPoints.Length; i++)
@@ -40,9 +41,10 @@ public class CheckPointManager : MonoBehaviour
             }
         }
 
-        return new CheckPoint();
+        return null;
     }
 
+    // Get all Checkpoints
     public CheckPoint[] GetCheckPoints()
     {
         return checkPoints;

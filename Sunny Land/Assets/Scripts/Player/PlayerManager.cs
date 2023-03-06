@@ -12,7 +12,8 @@ public class PlayerManager : MonoBehaviour
     {
         checkPointManager = FindObjectOfType<CheckPointManager>();
 
-        PlayerHealth.onDeath += SpawnAtCurrentCheckPoint;
+        // Subscribe to OnDeath Event to Spawn on current Checkpoint if Player dies
+        PlayerHealth.onDeath += () => SpawnAtCheckPoint(CheckPointManager.currentCheckPoint);       
     }
 
     private void Update()
@@ -33,12 +34,6 @@ public class PlayerManager : MonoBehaviour
     // Spawn at a Checkpoint with the given Check Point ID
     public void SpawnAtCheckPoint(int id)
     {
-        FindObjectOfType<PlayerManager>().Spawn(new Vector2(checkPointManager.GetCheckPoints()[id].GetSpawn().x, checkPointManager.GetCheckPoints()[id].GetSpawn().y + 2.18f));
-    }
-
-    // Spawn at current CheckPoint
-    public void SpawnAtCurrentCheckPoint()
-    {
-        FindObjectOfType<PlayerManager>().Spawn(new Vector2(checkPointManager.GetCheckPoint(CheckPointManager.currentCheckPoint).GetSpawn().x, checkPointManager.GetCheckPoint(CheckPointManager.currentCheckPoint).GetSpawn().y + 2.18f));
+        FindObjectOfType<PlayerManager>().Spawn(new Vector2(checkPointManager.GetCheckPoints()[id].GetSpawn().x, checkPointManager.GetCheckPoints()[id].GetSpawn().y +5f));
     }
 }
